@@ -1,17 +1,23 @@
 import pytest
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.options import Options
+
+def get_driver():
+    options = Options()
+    options.binary_location = "/usr/bin/chromium-browser"
+    return webdriver.Chrome(options=options)
 
 def test_open_saucedemo():
     """Тест 1: открыть сайт и проверить заголовок"""
-    driver = webdriver.Chrome()
+    driver = get_driver()
     driver.get("https://www.saucedemo.com/")
     assert "Swag Labs" in driver.title
     driver.quit()
 
 def test_login_valid():
     """Тест 2: авторизация"""
-    driver = webdriver.Chrome()
+    driver = get_driver()
     driver.get("https://www.saucedemo.com/")
     username_field = driver.find_element(By.ID, "user-name")
     username_field.send_keys("standard_user")
@@ -23,8 +29,8 @@ def test_login_valid():
     driver.quit()
 
 def test_login_invalid():
-    """Тест 3: негатвиный - неверный пароль"""
-    driver = webdriver.Chrome()
+    """Тест 3: негативный - неверный пароль"""
+    driver = get_driver()
     driver.get("https://www.saucedemo.com/")
     username_field = driver.find_element(By.ID, "user-name")
     username_field.send_keys("standard_user")
@@ -39,7 +45,7 @@ def test_login_invalid():
 
 def test_add_to_cart():
     """Тест 4: добавление товара в корзину"""
-    driver = webdriver.Chrome()
+    driver = get_driver()
     driver.get("https://www.saucedemo.com/")
     username_field = driver.find_element(By.ID, "user-name")
     username_field.send_keys("standard_user")
@@ -53,13 +59,13 @@ def test_add_to_cart():
     assert cart_badge.text == "1" 
     cart_icon = driver.find_element(By.CLASS_NAME, "shopping_cart_link")
     cart_icon.click()
-    cart_item = driver.find_element(By.CLASS_NAME, "inventory_item_name" )
+    cart_item = driver.find_element(By.CLASS_NAME, "inventory_item_name")
     assert cart_item.text == "Sauce Labs Backpack"
     driver.quit()
 
 def test_checkout_order():
     """Тест 5: полное оформление заказа"""
-    driver = webdriver.Chrome()
+    driver = get_driver()
     driver.get("https://www.saucedemo.com/")
     username_field = driver.find_element(By.ID, "user-name")
     username_field.send_keys("standard_user")
