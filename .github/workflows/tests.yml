@@ -28,3 +28,5 @@ jobs:
     - name: Run tests
       run: |
         pytest api_tests/ -v
+      env:
+        SELENIUM_REMOTE_URL: ""
