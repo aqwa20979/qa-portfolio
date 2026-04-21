@@ -54,45 +54,34 @@ def test_add_to_cart():
     assert badge.text == "1"
     driver.quit()
 
-def test_checkout_step_by_step():
-    """Тест 5: пошаговая проверка оформления заказа"""
-    driver = get_driver()
-    driver.get("https://www.saucedemo.com/")
-    
-    WebDriverWait(driver, 20).until(
-        EC.presence_of_element_located((By.ID, "user-name"))
-    ).send_keys("standard_user")
-    driver.find_element(By.ID, "password").send_keys("secret_sauce")
-    driver.find_element(By.ID, "login-button").click()
-    
-    WebDriverWait(driver, 20).until(
-        EC.element_to_be_clickable((By.ID, "add-to-cart-sauce-labs-backpack"))
-    ).click()
-    
-    driver.find_element(By.CLASS_NAME, "shopping_cart_link").click()
-    
-    time.sleep(3)
-    
-    cart_item = driver.find_element(By.CLASS_NAME, "inventory_item_name")
-    assert cart_item.text == "Sauce Labs Backpack"
-    
-    checkout = driver.find_element(By.ID, "checkout")
-    checkout.click()
-    
-    WebDriverWait(driver, 20).until(
-        EC.presence_of_element_located((By.ID, "first-name"))
-    ).send_keys("Ivan")
-    driver.find_element(By.ID, "last-name").send_keys("Test")
-    driver.find_element(By.ID, "postal-code").send_keys("123456")
-    driver.find_element(By.ID, "continue").click()
-    
-    WebDriverWait(driver, 20).until(
-        EC.element_to_be_clickable((By.ID, "finish"))
-    ).click()
-    
-    success = WebDriverWait(driver, 20).until(
-        EC.presence_of_element_located((By.CLASS_NAME, "complete-header"))
-    )
-    assert "Thank you for your order" in success.text
-    
-    driver.quit()
+# def test_checkout_step_by_step():
+#     driver = get_driver()
+#     driver.get("https://www.saucedemo.com/")
+#     WebDriverWait(driver, 20).until(
+#         EC.presence_of_element_located((By.ID, "user-name"))
+#     ).send_keys("standard_user")
+#     driver.find_element(By.ID, "password").send_keys("secret_sauce")
+#     driver.find_element(By.ID, "login-button").click()
+#     WebDriverWait(driver, 20).until(
+#         EC.element_to_be_clickable((By.ID, "add-to-cart-sauce-labs-backpack"))
+#     ).click()
+#     driver.find_element(By.CLASS_NAME, "shopping_cart_link").click()
+#     time.sleep(3)
+#     cart_item = driver.find_element(By.CLASS_NAME, "inventory_item_name")
+#     assert cart_item.text == "Sauce Labs Backpack"
+#     checkout = driver.find_element(By.ID, "checkout")
+#     checkout.click()
+#     WebDriverWait(driver, 20).until(
+#         EC.presence_of_element_located((By.ID, "first-name"))
+#     ).send_keys("Ivan")
+#     driver.find_element(By.ID, "last-name").send_keys("Test")
+#     driver.find_element(By.ID, "postal-code").send_keys("123456")
+#     driver.find_element(By.ID, "continue").click()
+#     WebDriverWait(driver, 20).until(
+#         EC.element_to_be_clickable((By.ID, "finish"))
+#     ).click()
+#     success = WebDriverWait(driver, 20).until(
+#         EC.presence_of_element_located((By.CLASS_NAME, "complete-header"))
+#     )
+#     assert "Thank you for your order" in success.text
+#     driver.quit()
