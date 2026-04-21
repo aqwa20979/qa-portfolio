@@ -84,11 +84,9 @@ def test_checkout_order():
     cart_icon = driver.find_element(By.CLASS_NAME, "shopping_cart_link")
     cart_icon.click()
     
-    WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.ID, "checkout"))
+    checkout_button = WebDriverWait(driver, 10).until(
+        EC.element_to_be_clickable((By.ID, "checkout"))
     )
-    
-    checkout_button = driver.find_element(By.ID, "checkout")
     checkout_button.click()
     
     WebDriverWait(driver, 10).until(
