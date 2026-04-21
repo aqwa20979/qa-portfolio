@@ -86,7 +86,6 @@ def test_checkout_order():
     checkout_button = driver.find_element(By.ID, "checkout")
     checkout_button.click()
     
-    # Ждём загрузки страницы оформления
     WebDriverWait(driver, 10).until(
         EC.presence_of_element_located((By.ID, "first-name"))
     )
@@ -101,6 +100,11 @@ def test_checkout_order():
     continue_button.click()
     finish_button = driver.find_element(By.ID, "finish")
     finish_button.click()
+    
+    WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.CLASS_NAME, "complete-header"))
+    )
+    
     success_message = driver.find_element(By.CLASS_NAME, "complete-header")
     assert "Thank you for your order" in success_message.text
     driver.quit()
