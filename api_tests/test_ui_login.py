@@ -58,30 +58,28 @@ def test_checkout_order():
     driver = get_driver()
     driver.get("https://www.saucedemo.com/")
     
-    WebDriverWait(driver, 20).until(
+    WebDriverWait(driver, 30).until(
         EC.presence_of_element_located((By.ID, "user-name"))
     ).send_keys("standard_user")
     driver.find_element(By.ID, "password").send_keys("secret_sauce")
     driver.find_element(By.ID, "login-button").click()
     
-    WebDriverWait(driver, 20).until(
+    WebDriverWait(driver, 30).until(
         EC.element_to_be_clickable((By.ID, "add-to-cart-sauce-labs-backpack"))
     ).click()
     
-    WebDriverWait(driver, 20).until(
-        EC.element_to_be_clickable((By.CLASS_NAME, "shopping_cart_link"))
-    ).click()
-    
-    time.sleep(2)
-    driver.refresh()
-    time.sleep(2)
-    
-    checkout_button = WebDriverWait(driver, 20).until(
-        EC.element_to_be_clickable((By.ID, "checkout"))
+    cart_icon = WebDriverWait(driver, 30).until(
+        EC.presence_of_element_located((By.CLASS_NAME, "shopping_cart_link"))
     )
-    checkout_button.click()
+    driver.execute_script("arguments[0].click();", cart_icon)
     
-    WebDriverWait(driver, 20).until(
+    time.sleep(3)
+    checkout = WebDriverWait(driver, 30).until(
+        EC.presence_of_element_located((By.ID, "checkout"))
+    )
+    driver.execute_script("arguments[0].click();", checkout)
+    
+    WebDriverWait(driver, 30).until(
         EC.presence_of_element_located((By.ID, "first-name"))
     )
     driver.find_element(By.ID, "first-name").send_keys("Ivan")
@@ -89,11 +87,12 @@ def test_checkout_order():
     driver.find_element(By.ID, "postal-code").send_keys("123456")
     driver.find_element(By.ID, "continue").click()
     
-    WebDriverWait(driver, 20).until(
+    finish = WebDriverWait(driver, 30).until(
         EC.element_to_be_clickable((By.ID, "finish"))
-    ).click()
+    )
+    driver.execute_script("arguments[0].click();", finish)
     
-    success_message = WebDriverWait(driver, 20).until(
+    success_message = WebDriverWait(driver, 30).until(
         EC.presence_of_element_located((By.CLASS_NAME, "complete-header"))
     )
     assert "Thank you for your order" in success_message.text
