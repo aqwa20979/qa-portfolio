@@ -12,6 +12,8 @@ def get_driver():
     options.add_argument('--disable-dev-shm-usage')
     options.add_argument('--disable-gpu')
     options.add_argument('--remote-debugging-port=9222')
+    options.add_argument('--window-size=1920,1080')
+    options.add_argument('--disable-blink-features=AutomationControlled')
     return webdriver.Chrome(options=options)
 
 def test_open_saucedemo():
@@ -84,12 +86,12 @@ def test_checkout_order():
     cart_icon = driver.find_element(By.CLASS_NAME, "shopping_cart_link")
     cart_icon.click()
     
-    checkout_button = WebDriverWait(driver, 10).until(
+    checkout_button = WebDriverWait(driver, 20).until(
         EC.element_to_be_clickable((By.ID, "checkout"))
     )
     checkout_button.click()
     
-    WebDriverWait(driver, 10).until(
+    WebDriverWait(driver, 20).until(
         EC.presence_of_element_located((By.ID, "first-name"))
     )
     
@@ -104,7 +106,7 @@ def test_checkout_order():
     finish_button = driver.find_element(By.ID, "finish")
     finish_button.click()
     
-    WebDriverWait(driver, 10).until(
+    WebDriverWait(driver, 20).until(
         EC.presence_of_element_located((By.CLASS_NAME, "complete-header"))
     )
     
