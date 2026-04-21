@@ -1,4 +1,5 @@
 import pytest
+import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
@@ -83,8 +84,13 @@ def test_checkout_order():
     login_button.click()
     add_button = driver.find_element(By.ID, "add-to-cart-sauce-labs-backpack")
     add_button.click()
+    
+    time.sleep(1)
+    
     cart_icon = driver.find_element(By.CLASS_NAME, "shopping_cart_link")
     cart_icon.click()
+    
+    time.sleep(1)
     
     checkout_button = WebDriverWait(driver, 20).until(
         EC.element_to_be_clickable((By.ID, "checkout"))
