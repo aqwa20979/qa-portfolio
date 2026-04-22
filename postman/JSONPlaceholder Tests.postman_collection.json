@@ -1,0 +1,78 @@
+{
+  "info": {
+    "_postman_id": "e41fd1c9-a1c9-4663-9ca7-c25a1f532abc",
+    "name": "JSONPlaceholder Tests",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "48031779",
+    "_collection_link": "https://go.postman.co/collection/48031779-e41fd1c9-a1c9-4663-9ca7-c25a1f532abc?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "GET Post by ID",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// Проверка 1: статус ответа 200\r",
+              "pm.test(\"Статус ответа 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "// Проверка 2: тело ответа — это объект, а не массив\r",
+              "pm.test(\"Ответ содержит данные одного поста\", function () {\r",
+              "    const data = pm.response.json();\r",
+              "    pm.expect(data).to.be.an('object');\r",
+              "});\r",
+              "\r",
+              "// Проверка 3: у поста есть поле id\r",
+              "pm.test(\"Пост содержит поле id\", function () {\r",
+              "    const data = pm.response.json();\r",
+              "    pm.expect(data).to.have.property('id');\r",
+              "});\r",
+              "\r",
+              "// Проверка 4: id поста равен 1\r",
+              "pm.test(\"ID поста равен 1\", function () {\r",
+              "    const data = pm.response.json();\r",
+              "    pm.expect(data.id).to.eql(1);\r",
+              "});\r",
+              "\r",
+              "// Проверка 5: у поста есть поле title\r",
+              "pm.test(\"Пост содержит поле title\", function () {\r",
+              "    const data = pm.response.json();\r",
+              "    pm.expect(data).to.have.property('title');\r",
+              "});\r",
+              "\r",
+              "// Проверка 6: title не пустой\r",
+              "pm.test(\"Заголовок поста не пустой\", function () {\r",
+              "    const data = pm.response.json();\r",
+              "    pm.expect(data.title).to.not.be.empty;\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://jsonplaceholder.typicode.com/posts/1",
+          "protocol": "https",
+          "host": [
+            "jsonplaceholder",
+            "typicode",
+            "com"
+          ],
+          "path": [
+            "posts",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
