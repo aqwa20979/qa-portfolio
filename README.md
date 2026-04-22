@@ -1,7 +1,9 @@
 # QA Portfolio
 
 ## Обо мне
+
 Здравствуйте! Меня зовут Роман.
+
 QA Engineer с опытом написания автотестов на Python. Специализируюсь на API и UI автоматизации. Умею строить тестовую инфраструктуру с нуля, генерировать отчёты и настраивать CI/CD.
 
 ## Технологический стек
@@ -9,27 +11,27 @@ QA Engineer с опытом написания автотестов на Python.
 - Python 3.14
 - Pytest
 - Requests (API тестирование)
-- Selenium (UI тестирование)
+- Playwright (UI тестирование)
 - Allure (отчёты)
 - Git / GitHub
 - GitHub Pages
+- GitHub Actions (CI/CD)
+- Docker
 
 ## Структура проекта
 
-```
-qa_combined_project/
-├── api_tests/
-│   ├── conftest.py
-│   ├── test_api_posts.py
-│   ├── test_schema.py
-│   └── test_ui_login.py
-├── .github/
-│   └── workflows/
-│       └── tests.yml
-├── .gitignore
-└── README.md
-```
-
+- qa_combined_project/
+  - api_tests/
+    - conftest.py
+    - test_api_posts.py
+    - test_schema.py
+    - test_ui_playwright.py
+  - .github/workflows/
+    - tests.yml
+  - .gitignore
+  - Dockerfile
+  - requirements.txt
+  - README.md
 
 ## API тесты (6 штук)
 
@@ -42,17 +44,66 @@ JSONPlaceholder
 - DELETE /posts/999 - удаление несуществующего поста (особенность API)
 - Проверка схемы ответа - валидация полей и типов данных
 
-## UI тесты (5 штук)
+## UI тесты (5 штук) — Playwright
 
-SauceDemo
+SauceDemo (все тесты стабильно проходят в CI)
 
-- Открытие сайта - проверка заголовка
-- Успешная авторизация - переход на страницу товаров
-- Неверный пароль - сообщение об ошибке
-- Добавление в корзину - проверка счётчика
-- Оформление заказа - полный E2E сценарий
+- Открытие сайта
+- Успешная авторизация
+- Неверный пароль
+- Добавление в корзину
+- Оформление заказа
 
 Все 11 тестов проходят стабильно.
+
+## Решение проблем: миграция с Selenium на Playwright
+
+### Проблема
+UI тесты на Selenium нестабильно работали в headless-режиме на GitHub Actions. Тест оформления заказа периодически падал с ошибкой NoSuchElementException.
+
+### Анализ
+- Локально все тесты проходили
+- В CI тесты падали на разных шагах
+- Проблема воспроизводилась только в headless-режиме
+
+### Решение
+Переписал UI тесты на Playwright:
+- Встроенные умные ожидания
+- Стабильная работа в headless-режиме
+- Меньше кода при той же функциональности
+
+### Результат
+Все 5 UI тестов стабильно проходят в GitHub Actions.
+
+## Docker
+
+Тесты упакованы в Docker-контейнер для воспроизводимого запуска в любой среде.
+
+### Сборка образа
+
+docker build -t qa-portfolio .
+
+### Запуск тестов
+
+docker run --rm qa-portfolio
+
+### Зависимости в контейнере
+
+- Python 3.14
+- Playwright + Chromium
+- Pytest, Requests
+- Системные библиотеки для headless-режима
+
+## SQL запросы
+
+В файле `queries.sql` представлены примеры:
+
+- SELECT с фильтрацией
+- JOIN (2 и 3 таблицы)
+- GROUP BY с агрегацией (COUNT, SUM)
+- HAVING для фильтрации групп
+- Подзапросы (IN, EXISTS)
+- Агрегация с датами
 
 ## Allure отчёт
 
@@ -61,6 +112,8 @@ https://aqwa20979.github.io/qa-portfolio/
 
 ## Запуск тестов
 
+### Локально
+
 Установка зависимостей:
 pip install -r requirements.txt
 
@@ -68,15 +121,18 @@ API тесты:
 pytest api_tests/test_api_posts.py -v
 
 UI тесты:
-pytest api_tests/test_ui_login.py -v
+pytest api_tests/test_ui_playwright.py -v
 
 Все тесты:
 pytest api_tests/ -v
 
+### Через Docker
+
+docker build -t qa-portfolio .
+docker run --rm qa-portfolio
+
 ## Контакты
 
-GitHub: github.com/aqwa20979
-Telegram: @romasha18
-Email: shamilov.roman@yandex.ru
-
-Портфолио обновляется. Новые тесты и проекты в разработке.
+- GitHub: github.com/aqwa20979
+- Telegram: @romasha18
+- Email: shamilov.roman@yandex.ru

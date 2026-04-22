@@ -13,21 +13,11 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Set up Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: '3.14'
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
 
-    - name: Install dependencies
-      run: |
-        pip install pytest requests allure-pytest
-        pip install playwright
-        playwright install chromium
+    - name: Build Docker image
+      run: docker build -t qa-portfolio .
 
-    - name: Run API tests
-      run: |
-        pytest api_tests/test_api_posts.py api_tests/test_schema.py -v
-
-    - name: Run Playwright UI tests
-      run: |
-        pytest api_tests/test_ui_playwright.py -v
+    - name: Run tests in Docker
+      run: docker run --rm qa-portfolio
