@@ -3,6 +3,8 @@ name: Run Tests
 on:
   push:
     branches: [ main ]
+    paths-ignore:
+      - 'README.md'
 
 jobs:
   test:
@@ -16,17 +18,16 @@ jobs:
       with:
         python-version: '3.14'
 
-    - name: Install Google Chrome
-      run: |
-        wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-        sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
-        sudo apt-get update
-        sudo apt-get install -y google-chrome-stable
-
     - name: Install dependencies
       run: |
-        pip install pytest requests selenium allure-pytest
+        pip install pytest requests allure-pytest
+        pip install playwright
+        playwright install chromium
 
-    - name: Run tests
+    - name: Run API tests
       run: |
-        pytest api_tests/ -v
+        pytest api_tests/test_api_posts.py api_tests/test_schema.py -v
+
+    - name: Run Playwright UI tests
+      run: |
+        pytest api_tests/test_ui_playwright.py -v
