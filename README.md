@@ -4,32 +4,20 @@
 
 Здравствуйте! Меня зовут Роман.
 
-QA Engineer с опытом написания автотестов на Python. Специализируюсь на API и UI автоматизации. Умею строить тестовую инфраструктуру с нуля, генерировать отчёты и настраивать CI/CD.
+QA Engineer с опытом написания автотестов на Python. Специализируюсь на API, UI и БД автоматизации. Умею строить тестовую инфраструктуру с нуля, генерировать отчёты и настраивать CI/CD.
 
 ## Технологический стек
 
-### Языки и тестирование
 - Python 3.14
-- Pytest (фреймворк)
-- Requests (API)
-- Playwright (UI)
-- psycopg2 (PostgreSQL)
-
-### Базы данных
-- PostgreSQL (Docker)
-- SQL (JOIN, GROUP BY, подзапросы, агрегации)
-
-### Инструменты
+- Pytest
+- Requests (API тестирование)
+- Playwright (UI тестирование)
+- PostgreSQL + psycopg2 (БД тестирование)
+- Postman + Newman (API коллекции)
 - Allure (отчёты)
-- GitHub Actions (CI/CD)
-- Docker (контейнеризация)
 - Git / GitHub
-
-### Покрытие
-- API: 6 тестов
-- UI: 5 тестов
-- БД: 8 тестов
-- Всего: 19 автотестов
+- GitHub Actions (CI/CD)
+- Docker
 
 ## Структура проекта
 
@@ -40,6 +28,8 @@ QA Engineer с опытом написания автотестов на Python.
     - test_schema.py
     - test_ui_playwright.py
     - test_database.py
+  - postman/
+    - JSONPlaceholder Tests.postman_collection.json
   - .github/workflows/
     - tests.yml
   - .gitignore
@@ -68,7 +58,29 @@ SauceDemo (все тесты стабильно проходят в CI)
 - Добавление в корзину
 - Оформление заказа
 
-Все 11 тестов проходят стабильно.
+## Тестирование базы данных (8 штук) — PostgreSQL
+
+Запущена БД в Docker-контейнере. Написаны автотесты на Python (pytest + psycopg2):
+
+- Подключение к БД
+- Создание таблиц (users, orders, products)
+- Вставка тестовых данных
+- Проверка SQL запросов: SELECT, JOIN, GROUP BY, HAVING, подзапросы, агрегатные функции
+
+## Postman коллекция
+
+В папке `postman` находится коллекция для тестирования API JSONPlaceholder.
+
+### Что внутри
+
+- GET запрос с проверками статуса и структуры ответа
+- 6 автоматических тестов на JavaScript
+
+### Импорт в Postman
+
+1. Открой Postman
+2. Нажми `Import` → `Upload Files`
+3. Выбери файл `JSONPlaceholder Tests.postman_collection.json`
 
 ## Решение проблем: миграция с Selenium на Playwright
 
@@ -108,16 +120,6 @@ docker run --rm qa-portfolio
 - Pytest, Requests
 - Системные библиотеки для headless-режима
 
-## Тестирование базы данных (PostgreSQL)
-
-Запущена БД в Docker-контейнере. Написаны автотесты на Python (pytest + psycopg2):
-
-- Подключение к БД
-- Создание таблиц (users, orders, products)
-- Вставка тестовых данных
-- Проверка SQL запросов: SELECT, JOIN, GROUP BY, HAVING, подзапросы, агрегатные функции
-
-
 ## Allure отчёт
 
 Онлайн отчёт доступен по ссылке:
@@ -135,6 +137,9 @@ pytest api_tests/test_api_posts.py -v
 
 UI тесты:
 pytest api_tests/test_ui_playwright.py -v
+
+БД тесты:
+pytest api_tests/test_database.py -v
 
 Все тесты:
 pytest api_tests/ -v
