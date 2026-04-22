@@ -8,15 +8,28 @@ QA Engineer с опытом написания автотестов на Python.
 
 ## Технологический стек
 
+### Языки и тестирование
 - Python 3.14
-- Pytest
-- Requests (API тестирование)
-- Playwright (UI тестирование)
+- Pytest (фреймворк)
+- Requests (API)
+- Playwright (UI)
+- psycopg2 (PostgreSQL)
+
+### Базы данных
+- PostgreSQL (Docker)
+- SQL (JOIN, GROUP BY, подзапросы, агрегации)
+
+### Инструменты
 - Allure (отчёты)
-- Git / GitHub
-- GitHub Pages
 - GitHub Actions (CI/CD)
-- Docker
+- Docker (контейнеризация)
+- Git / GitHub
+
+### Покрытие
+- API: 6 тестов
+- UI: 5 тестов
+- БД: 8 тестов
+- Всего: 19 автотестов
 
 ## Структура проекта
 
@@ -94,16 +107,15 @@ docker run --rm qa-portfolio
 - Pytest, Requests
 - Системные библиотеки для headless-режима
 
-## SQL запросы
+## Тестирование базы данных (PostgreSQL)
 
-В файле `queries.sql` представлены примеры:
+Запущена БД в Docker-контейнере. Написаны автотесты на Python (pytest + psycopg2):
 
-- SELECT с фильтрацией
-- JOIN (2 и 3 таблицы)
-- GROUP BY с агрегацией (COUNT, SUM)
-- HAVING для фильтрации групп
-- Подзапросы (IN, EXISTS)
-- Агрегация с датами
+- Подключение к БД
+- Создание таблиц (users, orders, products)
+- Вставка тестовых данных
+- Проверка SQL запросов: SELECT, JOIN, GROUP BY, HAVING, подзапросы, агрегатные функции
+
 
 ## Allure отчёт
 
