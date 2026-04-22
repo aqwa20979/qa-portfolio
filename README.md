@@ -20,19 +20,17 @@ QA Engineer с опытом написания автотестов на Python.
 
 ## Структура проекта
 
-qa_combined_project/
-├── api_tests/
-│   ├── conftest.py
-│   ├── test_api_posts.py
-│   ├── test_schema.py
-│   └── test_ui_playwright.py
-├── .github/
-│   └── workflows/
-│       └── tests.yml
-├── .gitignore
-└── README.md
-
-text
+- qa_combined_project/
+  - api_tests/
+    - conftest.py
+    - test_api_posts.py
+    - test_schema.py
+    - test_ui_playwright.py
+  - .github/workflows/
+    - tests.yml
+  - .gitignore
+  - README.md
+ 
 
 ## API тесты (6 штук)
 
