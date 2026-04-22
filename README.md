@@ -39,6 +39,7 @@ QA Engineer с опытом написания автотестов на Python.
     - test_api_posts.py
     - test_schema.py
     - test_ui_playwright.py
+    - test_database.py
   - .github/workflows/
     - tests.yml
   - .gitignore
