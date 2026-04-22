@@ -21,6 +21,7 @@ jobs:
     - name: Install dependencies
       run: |
         pip install pytest requests playwright pytest-playwright psycopg2-binary allure-pytest
+        pip uninstall -y pytest-base-url || true
         playwright install chromium
 
     - name: Run tests with Allure
