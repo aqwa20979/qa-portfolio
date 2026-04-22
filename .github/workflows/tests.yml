@@ -35,8 +35,6 @@ jobs:
         playwright install chromium
 
     - name: Run tests with Allure
-      env:
-        POSTGRES_HOST: postgres
       run: |
         pytest api_tests/ -v --alluredir=allure-results
 
