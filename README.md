@@ -11,12 +11,19 @@ QA Engineer с опытом написания автотестов на Python.
 - Python 3.14
 - Pytest
 - Requests (API тестирование)
+<<<<<<< HEAD
+=======
+- Selenium (UI тестирование)
+>>>>>>> a0f3137c4a96afac7bb9f3cceb2169f83b0de18f
 - Playwright (UI тестирование)
 - Allure (отчёты)
 - Git / GitHub
 - GitHub Pages
 - GitHub Actions (CI/CD)
+<<<<<<< HEAD
 - Docker
+=======
+>>>>>>> a0f3137c4a96afac7bb9f3cceb2169f83b0de18f
 
 ## Структура проекта
 
@@ -29,9 +36,14 @@ QA Engineer с опытом написания автотестов на Python.
   - .github/workflows/
     - tests.yml
   - .gitignore
+<<<<<<< HEAD
   - Dockerfile
   - requirements.txt
   - README.md
+=======
+  - README.md
+ 
+>>>>>>> a0f3137c4a96afac7bb9f3cceb2169f83b0de18f
 
 ## API тесты (6 штук)
 
@@ -59,6 +71,7 @@ SauceDemo (все тесты стабильно проходят в CI)
 ## Решение проблем: миграция с Selenium на Playwright
 
 ### Проблема
+<<<<<<< HEAD
 UI тесты на Selenium нестабильно работали в headless-режиме на GitHub Actions. Тест оформления заказа периодически падал с ошибкой NoSuchElementException.
 
 ### Анализ
@@ -69,12 +82,26 @@ UI тесты на Selenium нестабильно работали в headless-
 ### Решение
 Переписал UI тесты на Playwright:
 - Встроенные умные ожидания
+=======
+UI тесты на Selenium нестабильно работали в headless-режиме на GitHub Actions. Тест оформления заказа периодически падал с ошибкой `NoSuchElementException` — браузер не успевал загрузить страницу корзины или форму оформления, несмотря на явные ожидания.
+
+### Анализ
+- Локально все тесты проходили
+- В CI тесты падали на разных шагах (кнопка checkout, поле first-name, кнопка finish)
+- Проблема воспроизводилась только в headless-режиме
+- Selenium + ChromeDriver в CI показали себя нестабильно
+
+### Решение
+Переписал UI тесты на Playwright:
+- Встроенные умные ожидания (не нужны явные WebDriverWait)
+>>>>>>> a0f3137c4a96afac7bb9f3cceb2169f83b0de18f
 - Стабильная работа в headless-режиме
 - Меньше кода при той же функциональности
 
 ### Результат
 Все 5 UI тестов стабильно проходят в GitHub Actions.
 
+<<<<<<< HEAD
 ## Docker
 
 Тесты упакованы в Docker-контейнер для воспроизводимого запуска в любой среде.
@@ -105,6 +132,8 @@ docker run --rm qa-portfolio
 - Подзапросы (IN, EXISTS)
 - Агрегация с датами
 
+=======
+>>>>>>> a0f3137c4a96afac7bb9f3cceb2169f83b0de18f
 ## Allure отчёт
 
 Онлайн отчёт доступен по ссылке:
@@ -135,4 +164,8 @@ docker run --rm qa-portfolio
 
 - GitHub: github.com/aqwa20979
 - Telegram: @romasha18
+<<<<<<< HEAD
 - Email: shamilov.roman@yandex.ru
+=======
+- Email: shamilov.roman@yandex.ru
+>>>>>>> a0f3137c4a96afac7bb9f3cceb2169f83b0de18f
