@@ -12,6 +12,7 @@ QA Engineer с опытом написания автотестов на Python.
 - Pytest
 - Requests (API тестирование)
 - Playwright (UI тестирование)
+- Locust (нагрузочное тестирование)
 - PostgreSQL + psycopg2 (БД тестирование)
 - Postman + Newman (API коллекции)
 - Allure (отчёты)
@@ -28,6 +29,8 @@ QA Engineer с опытом написания автотестов на Python.
     - test_schema.py
     - test_ui_playwright.py
     - test_database.py
+  - performance_tests/
+    - locustfile.py
   - postman/
     - JSONPlaceholder Tests.postman_collection.json
   - .github/workflows/
@@ -66,6 +69,23 @@ SauceDemo (все тесты стабильно проходят в CI)
 - Создание таблиц (users, orders, products)
 - Вставка тестовых данных
 - Проверка SQL запросов: SELECT, JOIN, GROUP BY, HAVING, подзапросы, агрегатные функции
+
+## Нагрузочное тестирование (Locust)
+
+Проведён тест API JSONPlaceholder с 10 виртуальными пользователями.
+
+### Результаты
+
+- Всего запросов: 175
+- Ошибок: 0
+- Средний RPS: 4.3
+- Медианное время ответа: 110 мс
+- 95-й перцентиль: 300 мс
+- Максимальное время ответа: 684 мс
+
+### Вывод
+
+API стабильно работает под нагрузкой, ошибок не выявлено.
 
 ## Postman коллекция
 
