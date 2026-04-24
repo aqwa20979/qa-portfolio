@@ -19,6 +19,7 @@ QA Engineer с опытом написания автотестов на Python.
 - Git / GitHub
 - GitHub Actions (CI/CD)
 - Docker
+- Docker Compose
 
 ## Структура проекта
 
@@ -37,6 +38,7 @@ QA Engineer с опытом написания автотестов на Python.
     - tests.yml
   - .gitignore
   - Dockerfile
+  - docker-compose.yml
   - requirements.txt
   - README.md
 
@@ -92,10 +94,9 @@ API стабильно работает под нагрузкой, ошибок 
 cd performance_tests
 locust -f locustfile.py --host=https://jsonplaceholder.typicode.com
 
+## Postman коллекция
 
-### Postman коллекция
-
-В папке `postman` находится коллекция для тестирования API JSONPlaceholder.
+В папке postman находится коллекция для тестирования API JSONPlaceholder.
 
 ### Что внутри
 
@@ -105,26 +106,30 @@ locust -f locustfile.py --host=https://jsonplaceholder.typicode.com
 ### Импорт в Postman
 
 1. Открой Postman
-2. Нажми `Import` → `Upload Files`
-3. Выбери файл `JSONPlaceholder Tests.postman_collection.json`
+2. Нажми Import -> Upload Files
+3. Выбери файл JSONPlaceholder Tests.postman_collection.json
 
 ## Решение проблем: миграция с Selenium на Playwright
 
 ### Проблема
+
 UI тесты на Selenium нестабильно работали в headless-режиме на GitHub Actions. Тест оформления заказа периодически падал с ошибкой NoSuchElementException.
 
 ### Анализ
+
 - Локально все тесты проходили
 - В CI тесты падали на разных шагах
 - Проблема воспроизводилась только в headless-режиме
 
 ### Решение
+
 Переписал UI тесты на Playwright:
 - Встроенные умные ожидания
 - Стабильная работа в headless-режиме
 - Меньше кода при той же функциональности
 
 ### Результат
+
 Все 5 UI тестов стабильно проходят в GitHub Actions.
 
 ## Docker
@@ -145,6 +150,12 @@ docker run --rm qa-portfolio
 - Playwright + Chromium
 - Pytest, Requests
 - Системные библиотеки для headless-режима
+
+## Docker Compose
+
+Запуск PostgreSQL и тестов одной командой.
+
+docker-compose up --abort-on-container-exit
 
 ## Allure отчёт
 
@@ -174,6 +185,10 @@ pytest api_tests/ -v
 
 docker build -t qa-portfolio .
 docker run --rm qa-portfolio
+
+### Через Docker Compose
+
+docker-compose up --abort-on-container-exit
 
 ## Контакты
 
