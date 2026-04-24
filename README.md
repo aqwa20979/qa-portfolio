@@ -87,6 +87,12 @@ SauceDemo (все тесты стабильно проходят в CI)
 
 API стабильно работает под нагрузкой, ошибок не выявлено.
 
+### Запуск
+
+```bash
+cd performance_tests
+locust -f locustfile.py --host=https://jsonplaceholder.typicode.com
+
 ## Postman коллекция
 
 В папке `postman` находится коллекция для тестирования API JSONPlaceholder.
