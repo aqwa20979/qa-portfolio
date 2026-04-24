@@ -89,11 +89,11 @@ API стабильно работает под нагрузкой, ошибок 
 
 ### Запуск
 
-```bash
 cd performance_tests
 locust -f locustfile.py --host=https://jsonplaceholder.typicode.com
 
-## Postman коллекция
+
+### Postman коллекция
 
 В папке `postman` находится коллекция для тестирования API JSONPlaceholder.
 
